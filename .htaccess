@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Redirect all requests to index.php except API and asset requests
+RewriteCond %{REQUEST_URI} !^/api/ [NC]
+RewriteCond %{REQUEST_URI} !^/app/ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+
+# Ensure pretty URLs work correctly
+RewriteCond %{REQUEST_URI} ^/api/get-page.php$ [NC]
+RewriteRule ^api/get-page.php - [L]
