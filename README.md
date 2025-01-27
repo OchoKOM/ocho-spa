@@ -5,7 +5,7 @@ Ce projet est une application web monopage (SPA) utilisant PHP pour le backend e
 ## Structure du Projet
 
 ```
-route/
+root/
 ├─ .htaccess
 ├─ api/
 │  ├─ get-page.php
