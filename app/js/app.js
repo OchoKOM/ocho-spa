@@ -1,5 +1,5 @@
 // app/js/app.js
-
+import "./theme.js"
 import { apiClient } from "./ocho-api.js";
 
 // Helper function to fetch HTML content from the backend
@@ -41,7 +41,7 @@ async function navigate(route) {
   document.getElementById("app").innerHTML = response.content;
 
   // Update metadata
-  document.title = response.metadata.title || "Default Title";
+  document.title = response.metadata.title || "Title";
   const metaDescription = document.querySelector('meta[name="description"]');
   if (metaDescription) {
     metaDescription.content = response.metadata.description || "";

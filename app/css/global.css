@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  }
+  :root{
+      --bg: #dde2e7;
+      --text: #1b2229;
+      --card: #fff;
+      --shadow: #606b7221;
+      --primary: #165da5;
+  }
+  .dark{
+      --bg: #101316;
+      --card: #181f25;
+      --text: #e9f4ff;
+  }
+  /* Style général */
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+  }
+  
+  /* Conteneur principal */
+  #app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+  }
+  

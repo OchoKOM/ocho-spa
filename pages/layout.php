@@ -15,14 +15,18 @@ foreach ($directories as $dir) {
 
 ?>
 <main class="page-content">
-    <h1>Welcome to Our SPA With Vanilla JS and PHP</h1>
-    <p>Dynamic content loaded from PHP</p>
-    <?php
-    foreach ($pages as $page) {
-    ?>
-        <a href="<?=$page['path']?>"><?= $page['label']; ?></a>
-    <?php
-    }
-    ?>
+    <h1>Bienvenue sur notre Application Monopage (SPA) avec JavaScript et PHP</h1>
+    <nav>
+        <ul>
+            <?php
+            foreach ($pages as $page) {
+                ?>
+                <li><a href="<?= $page['path'] ?>"><?= $page['label']; ?></a></li>
+                <?php
+            }
+            ?>
+        </ul>
+    </nav>
+    <h2>Contenu des pages</h2>
     <?= $pageContent; ?>
 </main>
