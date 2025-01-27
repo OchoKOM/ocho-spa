@@ -65,6 +65,7 @@ route/
 
 ## Utilisation
 
+- **Pages** : Créez des dossiers dans le répertoire `pages` pour chaque page de votre application et mettez y des fichiers `page.php` ou `layout.php` pour y mettre votre contenu HTML.
 - **Navigation** : Cliquez sur les liens pour naviguer entre les pages. Le contenu sera chargé dynamiquement sans rechargement complet de la page.
 - **API** : Les requêtes vers l'API sont gérées par `OchoClient` dans `ocho-api.js`.
 - **Note** : Pour plus d'informations sur le fonctionnement de l'api veuillez visiter la documentation sur la page [Github](https://github.com/OchoKOM/xhr) du projet.
