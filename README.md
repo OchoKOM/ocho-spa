@@ -8,22 +8,29 @@ Ce projet est une application web monopage (SPA) utilisant PHP pour le backend e
 root/
 ├─ .htaccess
 ├─ api/
-│  ├─ get-page.php
-│  └─ json-response.php
+│  ├─ get-page.php       # Gestionnaire de routes
+│  └─ json-response.php  # Helper pour réponses JSON
 ├─ app/
 │  ├─ css/
-│  │  └─ style.css
-│  └─ js/
-│     ├─ app.js
-│     └─ ocho-api.js
-├─ index.php
-├─ pages/
+│  │  └─ style.css       # Styles globaux
+│  ├─ js/
+│  │  ├─ app.js          # Logique principale SPA
+│  │  └─ ocho-api.js     # Client API avec gestion d'erreurs
+│  └─ uploads/           # Stockage des fichiers
+├─ index.php             # Point d'entrée principal
+├─ pages/                # Contenu des pages
 │  ├─ about/
-│  │  └─ page.php
+│  │  ├─ metadata.json   # Métadonnées spécifiques
+│  │  └─ page.php        # Contenu HTML
 │  ├─ courses/
+│  │  ├─ dir/
+│  │  │  ├─ dir-1/         # Sous-répertoires
+│  │  │  └─ dir-2/
 │  │  └─ page.php
-│  ├─ **other direcrories here**
-│  └─ layout.php
+│  ├─ layout.php         # Layout principal
+│  ├─ page.php           # Layout par défaut
+│  └─ test/
+│     └─ page.php
 └─ README.md
 ```
 
@@ -48,20 +55,19 @@ root/
 
 1. Clonez le dépôt :
     ```sh
-    git clone <url-du-repo>
+    git clone https://github.com/OchoKOM/ocho-spa
     ```
 
 2. Placez le projet dans votre serveur web (par exemple, `htdocs` pour XAMPP ou `www` pour Wamp).
 
-3. Assurez-vous que le module `mod_rewrite` d'Apache est activé pour que les règles de réécriture dans 
+3. Assurez-vous que le module `mod_rewrite` d'Apache est activé pour que les règles de réécriture dans .htaccess fonctionnent correctement.
 
-.htaccess
+4. Configuration d’un VirtualHost (Recommandé)
+Pour une expérience optimale, configurez un VirtualHost pour pointer directement sur le répertoire du projet.
 
- fonctionnent correctement.
+5. Accédez à l'application via votre navigateur à l'adresse `http://localhost/` ou l'adresse de votre virtualhost.
 
-4. Accédez à l'application via votre navigateur à l'adresse `http://localhost/<nom-du-projet>`.
-
-- **Remarque** : Il est possible que l'application ne fonctionne pas correctement sans virtualhost, il est récommandé d'en créer un ou directement utiliser la racine de votre serveur web (`htdocs` ou `www` comme racine du projet). 
+- **Remarque** : Il est possible que l'application ne fonctionne pas correctement sans virtualhost ou s'il n'est pas a la racine de localhost (*non recommandé*: `http://localhost/app` ou `http://mon-virtualhost/app`, *recommandé*: `http://localhost` ou `http://mon-virtualhost`), il est récommandé d'en créer un ou directement utiliser la racine de votre serveur web (`htdocs` ou `www` comme racine du projet). 
 
 ## Utilisation
 
@@ -83,6 +89,119 @@ apiClient.get('api/get-page.php?route=about')
     console.error(error);
   });
 ```
+## Fonctionnalités Clés
+
+### 1. Système de Métadonnées Hiérarchique
+Chaque répertoire peut contenir un fichier `metadata.json` :
+```json
+{
+  "title": "À Propos",
+  "description": "Page de présentation de l'entreprise",
+  "styles": ["/app/css/about.css"]
+}
+```
+- Le titre et la description sont hérités du répertoire parent le plus proche
+- Les styles sont cumulatifs (parent → enfant)
+
+### 2. Layouts Dynamiques
+Exemple de `layout.php` :
+```php
+<header><!-- Navigation --></header>
+
+<main><?= $content ?></main>
+
+<footer><!-- Contenu global --></footer>
+```
+
+### 3. Gestion des Styles
+Les feuilles de style sont :
+1. Chargées dynamiquement via les métadonnées
+2. Empilées hiérarchiquement (styles globaux → spécifiques)
+3. Actualisées à chaque navigation
+
+### 4. API Intégrée
+Réponse JSON standard :
+```json
+{
+  "content": "<h1>Bienvenue</h1>",
+  "metadata": {
+    "title": "Accueil",
+    "description": "Site de démonstration"
+  },
+  "styles": [
+    "/app/css/global.css",
+    "/app/css/home.css"
+  ]
+}
+```
+
+## Utilisation de l'API Client
+
+Exemple complet avec gestion des métadonnées :
+```javascript
+import { apiClient } from "./ocho-api.js";
+
+async function loadPage(route) {
+  try {
+    const response = await apiClient.get(`/api/get-page.php?route=${route}`);
+    
+    // Mise à jour du DOM
+    document.getElementById('app').innerHTML = response.data.content;
+    
+    // Métadonnées dynamiques
+    document.title = response.data.metadata.title;
+    document.querySelector('meta[name="description"]')
+      .setAttribute('content', response.data.metadata.description);
+    
+    // Gestion des styles
+    response.data.styles.forEach(styleUrl => {
+      if (!document.querySelector(`link[href="${styleUrl}"]`)) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = styleUrl;
+        document.head.appendChild(link);
+      }
+    });
+    
+  } catch (error) {
+    // Mise à jour du DOM
+    document.getElementById('app').innerHTML = `
+      <h1>Erreur de chargement de la page</h1>
+      <p>Voir la console pour plus de détails.</p>
+    `;
+    console.error('Erreur de chargement:', error);
+  }
+}
+```
+
+## Configuration Avancée
+
+### Priorité des Fichiers
+1. `page.php` dans le répertoire courant
+2. `layout.php` le plus proche
+3. Liste des sous-répertoires (si aucun fichier trouvé)
+
+### Règles de Réécriture (.htaccess)
+```apache
+RewriteEngine On
+
+# Exclusion des assets et API
+RewriteCond %{REQUEST_URI} !^/api/ [NC]
+RewriteCond %{REQUEST_URI} !^/app/ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+```
+
+## Bonnes Pratiques
+
+1. Organiser les styles par fonctionnalité
+2. Utiliser les métadonnées pour le SEO
+3. Structurer les layouts de manière modulaire
+4. Valider les fichiers JSON avec :
+   ```bash
+   php -l metadata.json
+   ```
 
 ## Contribuer
 
@@ -91,3 +210,9 @@ Les contributions sont les bienvenues ! Veuillez soumettre une pull request ou o
 ## Licence
 
 Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+Voici la mise à jour du README intégrant les nouvelles fonctionnalités :
+
+# SPA avec Gestion de Métadonnées et Styles Dynamiques
+
+Application web monopage (SPA) avec routage dynamique, gestion hiérarchique de métadonnées et chargement automatique de styles CSS.

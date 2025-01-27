@@ -14,14 +14,15 @@ foreach ($directories as $dir) {
 }
 
 ?>
-<article class="page-content">
-    <h1>Welcome to Our Homepage</h1>
+<main class="page-content">
+    <h1>Welcome to Our SPA With Vanilla JS and PHP</h1>
     <p>Dynamic content loaded from PHP</p>
     <?php
     foreach ($pages as $page) {
     ?>
-        <a href="/<?=$page['path']?>"><?= $page['label']; ?></a>
+        <a href="<?=$page['path']?>"><?= $page['label']; ?></a>
     <?php
     }
     ?>
-</article>
+    <?= $pageContent; ?>
+</main>
