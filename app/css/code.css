@@ -1,0 +1,56 @@
+.content {
+    text-align: initial;
+}
+
+pre {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1em;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.key{
+    color:#03a9f4;
+}
+
+.method{
+    color: #ff5722;
+}
+
+.tag {
+    color: #f92672;
+}
+
+.tag-name {
+    color: #66d9ef;
+}
+
+.attribute {
+    color: #a6e22e;
+}
+
+.value {
+    color: #e6db74;
+}
+
+.comment {
+    color: #75715e;
+}
+
+ul, ol, p {
+    padding-block: .5rem;
+    padding-left: 1rem;
+}
+
+li {
+    padding-block: 0.25em;
+}
+
+.content {
+    padding: 2em;
+}

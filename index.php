@@ -9,7 +9,8 @@ $root = ""
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPA with History API</title>
     <link rel="stylesheet" href="/app/css/global.css">
-    <script defer src="<?=$root ?>/app/js/app.js" type="module"></script>
+    <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon">
+    <script defer src="<?=$root ?>/app/js/app" type="module"></script>
 </head>
 <body>
     <div id="app">Loading...</div>

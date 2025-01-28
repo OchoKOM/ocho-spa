@@ -1,12 +1,25 @@
 RewriteEngine On
 
-# Redirect all requests to index.php except API and asset requests
+# Redirect to index.php for non-API and non-asset requests
 RewriteCond %{REQUEST_URI} !^/api/ [NC]
 RewriteCond %{REQUEST_URI} !^/app/ [NC]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [L]
 
-# Ensure pretty URLs work correctly
+# Remove extensions for .php and .js files
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.js -f
+RewriteRule ^(.*)$ $1.js [L]
+
+# Handle specific pretty URLs
 RewriteCond %{REQUEST_URI} ^/api/get-page.php$ [NC]
 RewriteRule ^api/get-page.php - [L]
+
+# Custom error documents
+ErrorDocument 500 /pages/500.php
+ErrorDocument 403 /pages/403.php

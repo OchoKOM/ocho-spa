@@ -25,11 +25,9 @@
   
   /* Conteneur principal */
   #app {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     min-height: 100vh;
-    padding: 1.5rem;
+    position: fixed;
+    inset: 0;
+    overflow: auto;
   }
   

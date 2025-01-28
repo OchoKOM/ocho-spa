@@ -61,8 +61,27 @@ export default class OchoClient {
         };
       }
 
+      // Nouvelle fonction de parsing des en-têtes
+      const parseHeaders = (headersString) => {
+        const headers = {};
+        if (headersString) {
+          headersString
+            .trim()
+            .split("\r\n")
+            .forEach((line) => {
+              const [name, ...valueParts] = line.split(": ");
+              const value = valueParts.join(": ");
+              if (name && value) {
+                headers[name.toLowerCase()] = value;
+              }
+            });
+        }
+        return headers;
+      };
+
       xhr.onload = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
+          const headers = parseHeaders(xhr.getAllResponseHeaders());
           if (xhr.status >= 200 && xhr.status < 300) {
             try {
               const data = JSON.parse(xhr.response);
@@ -72,6 +91,7 @@ export default class OchoClient {
                 data,
                 status,
                 statusText,
+                headers,
               });
             } catch (error) {
               const data = xhr.response;
@@ -82,6 +102,7 @@ export default class OchoClient {
                   data,
                   status,
                   statusText,
+                  headers,
                 });
                 reject(new Error("Erreur de parsing JSON"));
               } else {
@@ -90,11 +111,27 @@ export default class OchoClient {
                   data,
                   status,
                   statusText,
+                  headers,
                 }); // Retourne la réponse brute
               }
             }
+          } else if (xhr.status >= 300 && xhr.status < 400) {
+            const data = JSON.parse(xhr.response);
+            const status = xhr.status;
+            const statusText = xhr.statusText;
+            if (mergedOptions.throwHttpErrors) {
+              console.warn(
+                `Code HTTP ${xhr.status}, Redirection`
+              );
+            }
+            resolve({
+              data,
+              status,
+              statusText,
+              headers,
+            });
           } else {
-            const data = xhr.response;
+            const data = JSON.parse(xhr.response);
             const status = xhr.status;
             const statusText = xhr.statusText;
             if (mergedOptions.throwHttpErrors) {
@@ -102,6 +139,7 @@ export default class OchoClient {
                 data,
                 status,
                 statusText,
+                headers,
               });
               reject(new Error(`Erreur HTTP ${xhr.status}: ${xhr.statusText}`));
             } else {
@@ -110,6 +148,7 @@ export default class OchoClient {
                 data,
                 status,
                 statusText,
+                headers,
               }); // Retourne la réponse brute
             }
           }

@@ -1,19 +1,34 @@
 // app/js/app.js
-import "./theme.js"
-import { apiClient } from "./ocho-api.js";
+import "./theme";
+import { apiClient } from "./ocho-api";
 
 // Helper function to fetch HTML content from the backend
 async function fetchPageContent(route) {
-  return await new Promise(async (resolve, reject) => {
+  return await new Promise(async (resolve) => {
     try {
-      const response = await apiClient.get(`./api/get-page.php?route=${route}`);
+      const response = await apiClient.get(`./api/get-page?route=${route}`);
+      
+      // Modifiez la partie de gestion des redirections :
       if (response.status >= 300 && response.status < 400) {
-        const location = response.data.location || response.headers.location;
+        const location = response.headers['x-spa-redirect'] || response.data.location;
+        
         if (location) {
-          // Gérer la redirection côté client
           navigate(location);
-          reject("Redirection détectée vers " + location);
+          return;
         }
+          console.error("Redirection error");
+          console.log(response);
+          
+          
+          resolve({
+            content: `
+            <h1>Erreur de redirection</h1>
+            <p>Voir la console pour plus de détails.</p>
+          `,
+            metadata: { title: "Erreur de chargement" },
+            styles: [],
+          });
+        
       }
       if (!response.data.content) {
         console.warn("The response is not valid data: \n", response.data);
@@ -23,12 +38,15 @@ async function fetchPageContent(route) {
     } catch (error) {
       console.error(error);
       // Mise à jour du DOM
-      resolve({ content: `
+      resolve({
+        content: `
         <h1>Erreur de chargement de la page</h1>
         <p>Voir la console pour plus de détails.</p>
-      `, metadata: { title: "Erreur de chargement" }, styles: [] });
+      `,
+        metadata: { title: "Erreur de chargement" },
+        styles: [],
+      });
     }
-    
   });
 }
 
@@ -47,16 +65,24 @@ async function navigate(route) {
     metaDescription.content = response.metadata.description || "";
   }
 
+  const exclusionList = [];
+  const newStyles = response.styles ?? [];
   // Update styles
   const existingStyles = document.querySelectorAll("link[data-dynamic-css]");
-  existingStyles.forEach((style) => style.remove());
+  existingStyles.forEach((style) => {
+    const sameHref = newStyles.some(s=>s === style.getAttribute("href"));
+    sameHref && exclusionList.push(style.getAttribute("href"));
+    !sameHref && style.remove()
+  });
 
-  response.styles.forEach((styleUrl) => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = styleUrl;
-    link.setAttribute("data-dynamic-css", "true");
-    document.head.appendChild(link);
+  newStyles.forEach((styleUrl) => {
+    if (!exclusionList.includes(styleUrl)) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = styleUrl;
+      link.setAttribute("data-dynamic-css", "true");
+      document.head.appendChild(link);
+    }
   });
 
   history.pushState({ route }, "", destination);

@@ -1,0 +1,83 @@
+main {
+  width: 100%;
+  min-height: max-content;
+  position: relative;
+  overflow-y: auto;
+  padding: 1rem;
+}
+/* Contenu de la page */
+.page-content {
+  max-width: 800px;
+  width: 100%;
+  background: var(--card);
+  border-radius: 1.5rem;
+  box-shadow: 0 0.25rem 1.5rem var(--shadow);
+  padding: 1rem;
+  text-align: center;
+  margin-inline: auto;
+}
+.logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+nav {
+  padding-block: 1rem;
+  text-align: center;
+}
+
+.page-content h1 {
+  font-size: 2em;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.page-content h2 {
+  font-size: 1.5em;
+  margin-bottom: 1rem;
+}
+
+/* Navigation */
+nav {
+  margin-bottom: 1.5rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+nav ul li {
+  margin: 0;
+}
+
+nav ul li a, .button {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: bold;
+  padding: 0.7rem 1rem;
+  border-radius: 2rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav ul li a:hover, .button:hover {
+  background-color: var(--primary);
+  color: var(--bg);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .page-content {
+    padding: 15px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

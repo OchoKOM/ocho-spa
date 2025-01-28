@@ -1,7 +1,7 @@
 {
-    "title": "Accueil",
+    "title": "Ocho SPA",
     "description": "Site de démonstration",
     "styles": [
-        "/app/css/style.css"
+        "/app/css/layout.css"
     ]
 }
