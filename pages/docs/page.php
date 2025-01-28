@@ -1,6 +1,6 @@
 <div class="content">
-    <span>GitHub Repo: <a href="https://github.com/OchoKOM/ocho-spa" class="value">https://github.com/OchoKOM/ocho-spa</a></span>
-    <span>Full documentation : <a href="https://ochokom.github.io/ocho-spa-docs/" class="value">https://ochokom.github.io/ocho-spa-docs/</a></span>
+    <div>GitHub Repo: <a target="_blank" rel="noopener noreferrer" href="https://github.com/OchoKOM/ocho-spa" class="value">https://github.com/OchoKOM/ocho-spa</a></div>
+    <div>Full documentation : <a target="_blank" rel="noopener noreferrer" href="https://ochokom.github.io/ocho-spa-docs/" class="value">https://ochokom.github.io/ocho-spa-docs/</a></div>
     <p>This project is a single-page application (SPA) using PHP for the backend and JavaScript for the frontend. It allows for dynamically loading pages and managing routes via an API.</p>
 
     <h2>Project Structure</h2>

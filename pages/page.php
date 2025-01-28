@@ -1,6 +1,7 @@
 <p>
     Modifier le fichier layout ou page dans le dossier <strong>pages/</strong> pour commencer.
 </p>
+<p>Modifier le fichier global ou page dans le repertoire <strong>app/css/</strong> pour le style.</p>
 <div class="logo">
     <svg width="48" height="48"
         viewBox="0 0 328 326.6">
