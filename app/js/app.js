@@ -1,5 +1,5 @@
 // app/js/app.js
-import "./theme";
+import { applyThemeClass, getTheme, setTheme } from "./theme";
 import { apiClient } from "./ocho-api";
 
 // Helper function to fetch HTML content from the backend
@@ -7,28 +7,27 @@ async function fetchPageContent(route) {
   return await new Promise(async (resolve) => {
     try {
       const response = await apiClient.get(`./api/get-page?route=${route}`);
-      
+
       // Modifiez la partie de gestion des redirections :
       if (response.status >= 300 && response.status < 400) {
-        const location = response.headers['x-spa-redirect'] || response.data.location;
-        
+        const location =
+          response.headers["x-spa-redirect"] || response.data.location;
+
         if (location) {
           navigate(location);
           return;
         }
-          console.error("Redirection error");
-          console.log(response);
-          
-          
-          resolve({
-            content: `
+        console.error("Redirection error");
+        console.log(response);
+
+        resolve({
+          content: `
             <h1>Erreur de redirection</h1>
             <p>Voir la console pour plus de détails.</p>
           `,
-            metadata: { title: "Erreur de chargement" },
-            styles: [],
-          });
-        
+          metadata: { title: "Erreur de chargement" },
+          styles: [],
+        });
       }
       if (!response.data.content) {
         console.warn("The response is not valid data: \n", response.data);
@@ -70,9 +69,9 @@ async function navigate(route) {
   // Update styles
   const existingStyles = document.querySelectorAll("link[data-dynamic-css]");
   existingStyles.forEach((style) => {
-    const sameHref = newStyles.some(s=>s === style.getAttribute("href"));
+    const sameHref = newStyles.some((s) => s === style.getAttribute("href"));
     sameHref && exclusionList.push(style.getAttribute("href"));
-    !sameHref && style.remove()
+    !sameHref && style.remove();
   });
 
   newStyles.forEach((styleUrl) => {
@@ -86,6 +85,16 @@ async function navigate(route) {
   });
 
   history.pushState({ route }, "", destination);
+  const theme_btn = document.getElementById("theme-toggle");
+  theme_btn && (theme_btn.innerHTML = applyThemeClass());
+
+  theme_btn &&
+    theme_btn.addEventListener("click", () => {
+      const themes = ["system", "dark", "light"];
+      const currentThene = getTheme();
+      const nextTheme = themes[themes.indexOf(currentThene) + 1] ?? themes[0];
+      theme_btn.innerHTML = setTheme(nextTheme);
+    });
 }
 
 // Event listener for anchor navigation

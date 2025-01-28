@@ -1,9 +1,5 @@
-<p>
-    Modifier le fichier layout ou page dans le dossier <strong>pages/</strong> pour commencer.
-</p>
-<p>Modifier le fichier global ou page dans le repertoire <strong>app/css/</strong> pour le style.</p>
 <div class="logo">
-    <svg width="48" height="48"
+    <svg class="logo-svg" width="100" height="100"
         viewBox="0 0 328 326.6">
         <g>
             <path fill="#EEF5FC"
@@ -38,5 +34,10 @@
             c2-1.3,3.3-3.3,5.3-4.6L128.8,51.1z" />
         </g>
     </svg>
+    <p>
+    Modifier le fichier <strong>layout.php</strong> ou <strong>page.php</strong> dans le dossier <strong>pages/</strong> pour commencer.
+</p>
+<p>Modifier le fichier <strong>global.css</strong> et <strong>layout.css</strong> dans le repertoire <strong>app/css/</strong> pour le style.</p>
+<p>Visiter la documentation pour plus de detail.</p>
     <a href="/docs" class="button">Quick Documentation</a>
 </div>

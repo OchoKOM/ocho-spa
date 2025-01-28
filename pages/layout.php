@@ -65,6 +65,7 @@ foreach ($directories as $dir) {
         </ul>
     </nav>
     <div class="page-content">
+        <button class="switch button" id="theme-toggle" title="Changer de thème">Changer de thème</button>
         <?= $pageContent; // Contenu de la page ;?>
     </div>
 </main>

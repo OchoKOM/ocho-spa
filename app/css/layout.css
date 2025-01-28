@@ -15,6 +15,7 @@ main {
   padding: 1rem;
   text-align: center;
   margin-inline: auto;
+  position: relative;
 }
 .logo {
   display: flex;
@@ -22,6 +23,14 @@ main {
   justify-content: center;
   align-items: center;
   text-decoration: none;
+}
+.logo .logo-svg{
+  animation: pulse 3s linear infinite;
+}
+@keyframes pulse{
+  50%{
+    transform: scale(.9);
+  }
 }
 nav {
   padding-block: 1rem;
@@ -69,7 +78,18 @@ nav ul li a:hover, .button:hover {
   background-color: var(--primary);
   color: var(--bg);
 }
-
+.switch{
+  border: none;
+  outline: none;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  display: inline;
+  aspect-ratio: 1;
+  background: none;
+  padding: .2rem;
+  cursor: pointer;
+}
 /* Responsive design */
 @media (max-width: 600px) {
   .page-content {
