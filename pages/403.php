@@ -1,5 +1,5 @@
 <?php
-include "../api/json-response.php";
+include "/api/json-response.php";
 
 sendJsonResponse([
     'content' => '<h1>403 - Forbiden</h1><p>You are not allowed to access this resource.</p>',

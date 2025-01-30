@@ -92,8 +92,11 @@ nav ul li a:hover, .button:hover {
 }
 /* Responsive design */
 @media (max-width: 600px) {
+  main{
+    padding: 0;
+  }
   .page-content {
-    padding: 15px;
+    padding: 1rem;
   }
 
   nav ul {

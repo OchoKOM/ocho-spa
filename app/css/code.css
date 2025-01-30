@@ -2,55 +2,66 @@
     text-align: initial;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+
+.string {
+    color: #a5d6ff;
+}
+
+.number {
+    color: #ad26f9;
+}
+
+.symbol {
+    color: #ce06ce;
+}
+
+.keymethod,
+.selector {
+    color: #6495ed;
+}
+
+
 pre {
-    background: #2d2d2d;
+    background: #151b23;
     color: #f8f8f2;
     padding: 1em;
     border-radius: 8px;
     overflow-x: auto;
+    min-height: max-content;
 }
 
 code {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Fira Code", 'Courier New', Courier, monospace;
+    white-space: pre-wrap;
+    min-height: max-content;
 }
 
-.key{
-    color:#03a9f4;
+.keyword {
+    color: #ff5b3c;
 }
 
-.method{
-    color: #ff5722;
+.method {
+    color: #c6a8dc;
 }
 
 .tag {
-    color: #f92672;
+    color: #9b9b7c;
 }
 
-.tag-name {
-    color: #66d9ef;
+.tag-name, .value {
+    color: #5ce76d;
 }
 
-.attribute {
-    color: #a6e22e;
-}
-
-.value {
-    color: #e6db74;
+.identifier,
+.property {
+    color: #35a1ff;
 }
 
 .comment {
-    color: #75715e;
+    font-style: italic;
+    color: #3b414d;
 }
-
-ul, ol, p {
-    padding-block: .5rem;
-    padding-left: 1rem;
-}
-
-li {
-    padding-block: 0.25em;
-}
-
-.content {
-    padding: 2em;
+.vhost-tag{
+    color: #1536cb;
 }
