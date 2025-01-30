@@ -242,21 +242,21 @@ Ce projet est une application web monopage (SPA) utilisant PHP pour le backend e
   ```
   **Utilisation de apiClient:**
   Importez `apiClient` depuis `ocho-api.js` :
-  ```js
+  ```js 
   import { apiClient } from "/app/js/ocho-api.js";
   ```
   - **Methode 1:**
-      ```
-      apiClient
-          .get(`/api/get-page?route=/path/to/page`)
-          .then((response) => {
-              console.log(response); // Réponse de l'api
-          })
+      ```js
+    apiClient
+        .get(`/api/get-page?route=/path/to/page`)
+        .then((response) => {
+            console.log(response); // Réponse de l'api
+        })
       ```
   - **Methode 2:**
-      ```
-      const response = await apiClient.get(`/api/get-page.php?route=/path/to/page`);
-      console.log(response); // Réponse de l'api
+      ```js
+    const response = await apiClient.get(`/api/get-page.php?route=/path/to/page`);
+    console.log(response); // Réponse de l'api
       ```
 
   **Structure de la réponse `apiClient`:**
