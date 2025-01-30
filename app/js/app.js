@@ -29,7 +29,7 @@ async function fetchPageContent(route) {
           styles: [],
         });
       }
-      if (!response.data.content) {
+      if (typeof response.data.content !== "string") {
         console.warn("The response is not valid data: \n", response.data);
         throw new Error("No valid data in the response.");
       }

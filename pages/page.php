@@ -35,9 +35,12 @@
         </g>
     </svg>
     <p>
-    Modifier le fichier <strong class="keymethod">layout.php</strong> ou <strong class="keymethod">page.php</strong> dans le dossier <strong class="keymethod">pages/</strong> pour commencer.
-</p>
-<p>Modifier le fichier <strong class="keymethod">global.css</strong> et <strong class="keymethod">layout.css</strong> dans le repertoire <strong class="keymethod">app/css/</strong> pour le style.</p>
-<p>Visiter la documentation pour plus de detail.</p>
+        Modifier le fichier <strong class="keymethod">layout.php</strong> ou <strong class="keymethod">page.php</strong> dans le dossier <strong class="keymethod">pages/</strong> pour commencer.
+    </p>
+    <p>
+        Modifier le fichier <strong class="keymethod">metadata.json</strong> dans le dossier <strong class="keymethod">pages/</strong> pour ajouter le chemin vers votre style.
+    </p>
+    <p>Modifier le fichier <strong class="keymethod">global.css</strong> et <strong class="keymethod">layout.css</strong> dans le repertoire <strong class="keymethod">app/css/</strong> pour le style.</p>
+    <p>Visiter la documentation pour plus de detail.</p>
     <a href="/docs" class="button">Quick Documentation</a>
 </div>
