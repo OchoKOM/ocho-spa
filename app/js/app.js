@@ -59,10 +59,13 @@ async function navigate(route) {
 
   // Update metadata
   document.title = response.metadata.title || "Title";
-  const metaDescription = document.querySelector('meta[name="description"]');
+  const metaDescription = document.querySelector('meta[name="description"]') || document.createElement("meta");
+  metaDescription.name = "description";
   if (metaDescription) {
     metaDescription.content = response.metadata.description || "";
   }
+  !document.querySelector('meta[name="description"]') && document.head.appendChild(metaDescription);
+
 
   const exclusionList = [];
   const newStyles = response.styles ?? [];

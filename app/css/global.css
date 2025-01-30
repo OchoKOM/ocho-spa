@@ -1,10 +1,9 @@
 * {
     box-sizing: border-box;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    
 }
   :root{
-      --bg: #dde2e7;
+      --bg: #f2f9ff;
       --text: #1b2229;
       --card: #fff;
       --shadow: #606b7221;
@@ -19,6 +18,8 @@
   body {
     background-color: var(--bg);
     color: var(--text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
   
   /* Conteneur principal */

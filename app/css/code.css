@@ -29,10 +29,10 @@ pre {
     border-radius: 8px;
     overflow-x: auto;
     min-height: max-content;
+    font-family: "Fira Code", Courier, 'Courier New', monospace;
 }
 
 code {
-    font-family: "Fira Code", 'Courier New', Courier, monospace;
     white-space: pre-wrap;
     min-height: max-content;
 }
