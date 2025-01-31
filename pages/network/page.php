@@ -65,7 +65,7 @@ $serverPort = $serverPort !== 80 ? ":$serverPort" : "";
 if (!empty($ipAddresses)) {
     echo "Network Addresses: <br>\n";
     foreach ($ipAddresses as $ip) {
-        echo "<br>\n <a href=\"http://$ip$serverPort\" class=\"button\">$ip$serverPort</a>\n";
+        echo "<br>\n <a href=\"http://$ip$serverPort\" class=\"button\">$ip$serverPort</a><br>\n";
     }
 } else {
     echo "No network adress.\n";
