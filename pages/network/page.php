@@ -23,9 +23,13 @@ function getAllIPAddresses() {
             exec('ip addr', $output);
             foreach ($output as $line) {
                 if (strpos($line, 'inet ') !== false && strpos($line, '127.0.0.1') === false) {
-                    $parts = preg_split('/\s+/', $line);
-                    $ip = trim($parts[1]);
-                    $ipAddresses[] = explode('/', $ip)[0]; // Remove subnet mask
+                    // Split the line by whitespace and filter out empty elements
+                    $parts = array_filter(preg_split('/\s+/', $line));
+                    $parts = array_values($parts); // Re-index the array
+                    if (isset($parts[1])) {
+                        $ip = trim($parts[1]);
+                        $ipAddresses[] = explode('/', $ip)[0]; // Remove subnet mask
+                    }
                 }
             }
 
@@ -34,9 +38,12 @@ function getAllIPAddresses() {
                 exec('ifconfig', $output);
                 foreach ($output as $line) {
                     if (strpos($line, 'inet ') !== false && strpos($line, '127.0.0.1') === false) {
-                        $parts = preg_split('/\s+/', $line);
-                        $ip = trim($parts[1]);
-                        $ipAddresses[] = $ip;
+                        $parts = array_filter(preg_split('/\s+/', $line));
+                        $parts = array_values($parts); // Re-index the array
+                        if (isset($parts[1])) {
+                            $ip = trim($parts[1]);
+                            $ipAddresses[] = explode('/', $ip)[0]; // Remove subnet mask
+                        }
                     }
                 }
             }
@@ -49,13 +56,18 @@ function getAllIPAddresses() {
 // Get all IP addresses
 $ipAddresses = getAllIPAddresses();
 
+// Get the server port
+$serverPort = $_SERVER['SERVER_PORT'];
+
+$serverPort = $serverPort !== 80 ? ":$serverPort" : "";
+
 // Print the results
 if (!empty($ipAddresses)) {
-    echo "All IP Addresses found:\n";
+    echo "Network Addresses: <br>\n";
     foreach ($ipAddresses as $ip) {
-        echo "<br> $ip\n";
+        echo "<br>\n <a href=\"http://$ip$serverPort\" class=\"button\">$ip$serverPort</a>\n";
     }
 } else {
-    echo "No IP addresses found.\n";
+    echo "No network adress.\n";
 }
 ?>
