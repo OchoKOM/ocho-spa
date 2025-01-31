@@ -2,7 +2,7 @@
         <h2>Quick documentation</h2>
         <div>
           <div>GitHub Repo: <a href="https://github.com/OchoKOM/ocho-spa" class="string">https://github.com/OchoKOM/ocho-spa</a></div>
-          <div>Full documentation : <a class="string" href="https://ochokom.github.io/ocho-spa-docs/" target="_blank" rel="noopener noreferrer">https://ochokom.github.io/ocho-spa-docs/</a></div>
+          <div>Full documentation : <a class="string" href="https://ochokom.github.io/ocho-spa-docs" target="_blank" rel="noopener noreferrer">https://ochokom.github.io/ocho-spa-docs</a></div>
         </div>
         <h3>Features</h3>
         <pre><code><span class="keymethod">&lt;?php</span>

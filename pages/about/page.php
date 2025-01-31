@@ -34,6 +34,6 @@
             c2-1.3,3.3-3.3,5.3-4.6L128.8,51.1z" />
         </g>
     </svg>
-    <p style="text-align: initial;">Le projet Ocho SPA est une application web monopage (SPA) qui utilise PHP pour le backend et JavaScript pour le frontend. Il permet de charger dynamiquement des pages et de gérer les routes via une API.</p>
+    <p style="text-align: initial;">The Ocho SPA project is a single-page web application that uses PHP for the backend and JavaScript for the frontend. It allows pages to be loaded dynamically and routes to be managed via an API.</p>
     <a class="button" href="https://ochokom.github.io/ocho-spa-docs/" target="_blank" rel="noopener noreferrer">Documentation</a>
 </div>

@@ -1,6 +1,6 @@
 {
     "title": "Ocho SPA",
-    "description": "Site de démonstration",
+    "description": "A power single page application framework.",
     "styles": [
         "/app/css/layout.css",
         "/app/css/code.css" 
