@@ -102,11 +102,14 @@ async function navigate(route) {
 
 // Event listener for anchor navigation
 function setupAnchorNavigation() {
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", async (event) => {
     const anchor = event.target.closest("a");
     if (anchor && anchor.href.startsWith(window.location.origin)) {
       event.preventDefault();
       const route = anchor.getAttribute("href");
+      if (route.trim("/") === window.location.origin.trim("/")) {
+        location.href = "/";
+      }
       navigate(route);
     }
   });
