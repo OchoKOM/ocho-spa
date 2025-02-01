@@ -1,5 +1,5 @@
 // app/js/app.js
-import { applyThemeClass, getTheme, setTheme } from "./theme";
+import "./theme"
 import { apiClient } from "./ocho-api";
 
 // Helper function to fetch HTML content from the backend
@@ -7,7 +7,10 @@ async function fetchPageContent(route) {
   return await new Promise(async (resolve) => {
     try {
       const response = await apiClient.get(`./api/get-page?route=${route}`);
-
+      if (!!response.headers["x-spa-refresh"]) {
+        location.reload();
+      }
+      
       // Modifiez la partie de gestion des redirections :
       if (response.status >= 300 && response.status < 400) {
         const location =
@@ -51,6 +54,17 @@ async function fetchPageContent(route) {
 
 // Function to update the page content dynamically
 async function navigate(route) {
+  // Créer et déclencher l'événement personnalisé
+  const navigationStartEvent = new CustomEvent("navigationstart", {
+    detail: { route }
+  });
+  if (route.trim("/") === window.location.origin.trim("/")) {
+    const refresh_url = location.href.split(window.location.origin)[1] || "/";
+    location.href = refresh_url;
+    return;
+  }
+  document.dispatchEvent(navigationStartEvent);
+
   const destination = `${route}`;
   const response = await fetchPageContent(destination);
 
@@ -88,16 +102,12 @@ async function navigate(route) {
   });
 
   history.pushState({ route }, "", destination);
-  const theme_btn = document.getElementById("theme-toggle");
-  theme_btn && (theme_btn.innerHTML = applyThemeClass());
-
-  theme_btn &&
-    theme_btn.addEventListener("click", () => {
-      const themes = ["system", "dark", "light"];
-      const currentThene = getTheme();
-      const nextTheme = themes[themes.indexOf(currentThene) + 1] ?? themes[0];
-      theme_btn.innerHTML = setTheme(nextTheme);
-    });
+  
+  // Créer et déclencher l'événement personnalisé
+  const navigationEndEvent = new CustomEvent("navigationend", {
+    detail: { route, response }
+  });
+  document.dispatchEvent(navigationEndEvent);
 }
 
 // Event listener for anchor navigation
@@ -107,9 +117,7 @@ function setupAnchorNavigation() {
     if (anchor && anchor.href.startsWith(window.location.origin)) {
       event.preventDefault();
       const route = anchor.getAttribute("href");
-      if (route.trim("/") === window.location.origin.trim("/")) {
-        location.href = "/";
-      }
+
       navigate(route);
     }
   });

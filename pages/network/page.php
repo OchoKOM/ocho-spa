@@ -57,7 +57,7 @@ function getAllIPAddresses() {
 $ipAddresses = getAllIPAddresses();
 
 // Get the server port
-$serverPort = $_SERVER['SERVER_PORT'];
+$serverPort = +$_SERVER['SERVER_PORT'];
 
 $serverPort = $serverPort !== 80 ? ":$serverPort" : "";
 
