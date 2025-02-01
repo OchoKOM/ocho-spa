@@ -167,11 +167,11 @@
     }
 }</code></pre>
 You can adapt according to your own logic or follow the instructions below: 
-<ul>
-    <li>
-        <div>
-            <div><strong>Navigation:</strong> use this function to manage dynamic navigation.</div>
-    <pre>
+    <ul>
+        <li>
+            <div>
+                <div><strong>Navigation:</strong> use this function to manage dynamic navigation.</div>
+        <pre>
 <code><span class="keyword">async</span> <span class="keyword">function</span> <span class="method">navigate</span>(<span class="identifier">route</span>) {
     <span class="keyword">const</span> <span class="identifier">destination</span> = <span class="string">`${route}`</span>;
     <span class="keyword">const</span> <span class="identifier">response</span> = <span class="keyword">await</span> <span class="method">fetchPageContent</span>(<span class="identifier">destination</span>);
@@ -217,14 +217,14 @@ You can adapt according to your own logic or follow the instructions below:
     
     <span class="identifier">history</span>.<span class="method">pushState</span>({<span class="keymethod"> route </span>}, <span class="string">""</span>, <span class="identifier">destination</span>);
 }</code>
-    </pre>
-        </div>
-    </li>
-    <li>
-        <div><strong>Page content and redirections:</strong> use this function </div>
-        
-<div>
-    <pre>
+        </pre>
+            </div>
+        </li>
+        <li>
+            <div><strong>Page content and redirections:</strong> use this function </div>
+            
+    <div>
+        <pre>
 <code><span class="keyword">async</span> <span class="keyword">function</span> <span class="method">fetchPageContent</span>(<span class="identifier">route</span>) {
     <span class="keyword">return</span> <span class="keyword">await</span> <span class="keyword">new</span> <span class="method">Promise</span>(<span class="keyword">async</span> (<span class="identifier">resolve</span>) =&gt; {
     <span class="keyword">try</span> {
@@ -271,20 +271,10 @@ You can adapt according to your own logic or follow the instructions below:
         });
     }
 }</code>
-    </pre>
-</div>
-    </li>
-</ul>
-        <h3>Best Practices</h3>
-        <ul>
-            <li>Organize styles by functionality</li>
-            <li>Use metadata to improve SEO</li>
-            <li>Structure layouts modularly</li>
-            <li>Validate JSON files with:
-                <pre><code><span class="keyword">php</span> <span class="property">-l</span> metadata.json</code></pre>
-            </li>
-        </ul>
-    
-      <p>For more information visit the full documentation</p>
-      <a class="button" href="https://ochokom.github.io/ocho-spa-docs/" target="_blank" rel="noopener noreferrer">Full documentation</a>
+        </pre>
     </div>
+        </li>
+    </ul>
+    <p>For more information visit the full documentation</p>
+    <a class="button" href="https://ochokom.github.io/ocho-spa-docs/" target="_blank" rel="noopener noreferrer">Full documentation</a>
+</div>
