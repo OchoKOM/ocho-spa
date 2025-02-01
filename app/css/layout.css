@@ -103,8 +103,10 @@ nav ul li a:hover, .button:hover {
   right: 1rem;
   top: 1rem;
   display: inline;
+  width: 2rem;
   aspect-ratio: 1;
   background: none;
+  border-radius: 50%;
   padding: .2rem;
   cursor: pointer;
 }
