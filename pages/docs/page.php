@@ -186,6 +186,17 @@ You can adapt according to your own logic or follow the instructions below:
                 <div><strong>Navigation:</strong> use this function to manage dynamic navigation.</div>
         <pre>
 <code><span class="keyword">async</span> <span class="keyword">function</span> <span class="method">navigate</span>(<span class="identifier">route</span>) {
+    <span class="comment">// Create and trigger custom event</span>
+    <span class="keyword">const</span> <span class="identifier">navigationStartEvent</span> = <span class="keyword">new</span> <span class="method">CustomEvent</span>(<span class="string">"navigationstart"</span>, {
+        <span class="keymethod">detail</span>: {<span class="keymethod"> route </span>}
+    });
+    <span class="keyword">if</span> (<span class="identifier">route</span>.<span class="method">trim</span>(<span class="string">"/"</span>) === <span class="identifier">window</span>.<span class="keymethod">location</span>.<span class="keymethod">origin</span>.<span class="method">trim</span>(<span class="string">"/"</span>)) {
+        <span class="keyword">const</span> <span class="identifier">refresh_url</span> = <span class="identifier">location</span>.<span class="keymethod">href</span>.<span class="method">split</span>(<span class="identifier">window</span>.<span class="keymethod">location</span>.<span class="keymethod">origin</span>)[<span class="number">1</span>] || <span class="string">"/"</span>;
+        <span class="identifier">location</span>.<span class="keymethod">href</span> = <span class="identifier">refresh_url</span>;
+        <span class="keyword">return</span>;
+    }
+    <span class="identifier">document</span>.<span class="method">dispatchEvent</span>(<span class="identifier">navigationStartEvent</span>);
+
     <span class="keyword">const</span> <span class="identifier">destination</span> = <span class="string">`${route}`</span>;
     <span class="keyword">const</span> <span class="identifier">response</span> = <span class="keyword">await</span> <span class="method">fetchPageContent</span>(<span class="identifier">destination</span>);
     
@@ -201,7 +212,7 @@ You can adapt according to your own logic or follow the instructions below:
         <span class="identifier">metaDescription</span>.<span class="keymethod">content</span> = <span class="identifier">response</span>.<span class="keymethod">metadata</span>.<span class="keymethod">description</span> || <span class="string">""</span>;
     }
     
-    <span class="comment">Update the styles</span>
+    <span class="comment">// Update the styles</span>
     <span class="keyword">const</span> <span class="identifier">exclusionList</span> = [];
     <span class="keyword">const</span> <span class="identifier">newStyles</span> = <span class="identifier">response</span>.<span class="keymethod">styles</span> ?? [];
     
@@ -229,6 +240,12 @@ You can adapt according to your own logic or follow the instructions below:
     
     
     <span class="identifier">history</span>.<span class="method">pushState</span>({<span class="keymethod"> route </span>}, <span class="string">""</span>, <span class="identifier">destination</span>);
+
+    <span class="comment">// Create and trigger custom event</span>
+    <span class="keyword">const</span> <span class="identifier">navigationEndEvent</span> = <span class="keyword">new</span> <span class="method">CustomEvent</span>(<span class="string">"navigationend"</span>, {
+        <span class="keymethod">detail</span>: { <span class="identifier">route</span>,<span class="keymethod"> response </span>}
+    });
+    <span class="identifier">document</span>.<span class="method">dispatchEvent</span>(<span class="identifier">navigationEndEvent</span>);
 }</code>
         </pre>
             </div>

@@ -338,6 +338,17 @@ Vous pouvez adapter selon votre propre logique ou suivre les instructions ci-des
 
 ```js
 async function navigate(route) {
+  // Créer et déclencher l'événement personnalisé
+  const navigationStartEvent = new CustomEvent("navigationstart", {
+    detail: { route }
+  });
+  if (route.trim("/") === window.location.origin.trim("/")) {
+    const refresh_url = location.href.split(window.location.origin)[1] || "/";
+    location.href = refresh_url;
+    return;
+  }
+  document.dispatchEvent(navigationStartEvent);
+
   const destination = `${route}`;
   const response = await fetchPageContent(destination);
 
@@ -373,6 +384,12 @@ async function navigate(route) {
   });
 
   history.pushState({ route }, "", destination);
+  
+  // Créer et déclencher l'événement personnalisé
+  const navigationEndEvent = new CustomEvent("navigationend", {
+    detail: { route, response }
+  });
+  document.dispatchEvent(navigationEndEvent);
 }
 ```
 
