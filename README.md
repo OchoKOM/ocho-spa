@@ -212,6 +212,18 @@ if (file_exists($phpFile)) {
   ```
 
   - La variable `$pageContent` affiche le contenu des `page.php` du répertoire courant et des sous-répertoires qui n'ont pas de `layout.php`
+  - Le fichier de mise en page (layout) peut adopter un comportement de page en ajoutant le mot-clé `"as page"` en haut du fichier, comme dans l'exemple ci-dessous :
+    ```html
+    <?php 
+      "as page"; // Chaîne clé pour agir comme une page.
+    ?>
+    <div class="page">
+    <?php 
+        echo $pageContent; // Contenu de la page (facultatif)
+    ?>
+      <h1>Un layout avec un comportement de page</h1>
+    </div>
+    ```
 
 - **Système de Métadonnées Hiérarchique**
   Chaque répertoire peut contenir un fichier `metadata.json` avec cette structure:
@@ -441,4 +453,4 @@ Les contributions sont les bienvenues. Ouvrez une `pull request` ou une `issue` 
 
 ## Licence
 
-Ce projet est sous licence `MIT`. Consultez le fichier `LICENSE` pour les détails.
+Ce projet est sous licence `MIT`.

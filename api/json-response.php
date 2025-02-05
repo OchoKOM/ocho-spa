@@ -53,6 +53,35 @@ function checkJsFilesForChanges() {
 
     return false;
 }
+// Fonction pour vérifier les fichiers JS
+function checkCSSFilesForChanges() {
+    $jsDirectory = __DIR__ . '/../app/css';
+    $jsFiles = getAllJsFiles($jsDirectory);
+
+    $lastModifiedTimes = [];
+
+    foreach ($jsFiles as $file) {
+        if (file_exists($file)) {
+            $lastModifiedTimes[$file] = filemtime($file);
+        }
+    }
+
+    // Stocker les derniers temps de modification dans une session ou un fichier
+    session_start();
+    if (isset($_SESSION['css_last_modified'])) {
+        foreach ($_SESSION['css_last_modified'] as $file => $time) {
+            if (isset($lastModifiedTimes[$file]) && $lastModifiedTimes[$file] > $time) {
+                // Un fichier JS a été modifié
+                $_SESSION['css_last_modified'] = $lastModifiedTimes;
+                return true;
+            }
+        }
+    } else {
+        $_SESSION['css_last_modified'] = $lastModifiedTimes;
+    }
+
+    return false;
+}
 
 // Fonction pour envoyer une réponse JSON avec un code de statut
 function sendJsonResponse($data, $statusCode = 200, $customHeaders = []) {

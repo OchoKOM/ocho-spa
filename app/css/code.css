@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
 .content {
     text-align: initial;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
 
 .string {
     color: #a5d6ff;
@@ -29,6 +29,9 @@ pre {
     border-radius: 8px;
     overflow-x: auto;
     min-height: max-content;
+    font-family: "Fira Code", Courier, 'Courier New', monospace;
+}
+code, code * {
     font-family: "Fira Code", Courier, 'Courier New', monospace;
 }
 

@@ -57,6 +57,19 @@
 <span class="tag">&lt;<span class="tag-name">footer</span>&gt;</span><span class="comment">&lt;!-- Footer --&gt;</span><span class="tag">&lt;/<span class="tag-name">footer</span>&gt;</span></code></pre>
                 <ul>
                     <li>The variable <span class="identifier">$pageContent</span> displays the contents of the <span class="identifier">page.php</span> in the current directory and subdirectories that do not have a <span class="identifier">layout.php</span></li>
+                    <li>
+                        <p>The layout file can have page behaviour by adding an <span class="identifier">"as page"</span> keyword on top of the file like on the example below:</p>
+                        <pre><code><span class="keymethod">&lt;?php</span> 
+    <span class="string">"as page"</span>; <span class="comment">// Keystring to act like page.</span>
+<span class="keymethod">?&gt;</span>
+&lt;<span class="tag-name">div</span> <span class="identifier">class</span>=<span class="string">"page"</span>&gt;
+<span class="keymethod">&lt;?php</span> 
+    <span class="keyword">echo</span> <span class="identifier">$pageContent</span>; <span class="comment">// Page contents (optional)</span>
+<span class="keymethod">?&gt;</span>
+    <span class="tag">&lt;<span class="tag-name">h1</span>&gt;</span>Some layout with page behaviour<span class="tag">&lt;/<span class="tag-name">h1</span>&gt;</span>
+<span class="tag">&lt;/<span class="tag-name">div</span>&gt;</span>
+</code></pre>
+                    </li>
                 </ul>
             </li>
             <li>

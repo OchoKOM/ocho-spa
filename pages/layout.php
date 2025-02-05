@@ -10,7 +10,6 @@ foreach ($directories as $dir) {
         $pages[] = ['label' => strtoupper($baseName), 'path' => $baseName];
     }
 }
-
 ?>
 <main>
     <div class="menu-bar">

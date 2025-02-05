@@ -39,7 +39,7 @@ switch ($httpCode) {
     case 403:
         header_remove();
         sendJsonResponse([
-            'content' => '<h1>403 - Forbiden</h1><p>You are not allowed to access this resource.</p>',
+            'content' => '<h1>403 - Forbiden.</h1><p>You are not allowed to access this resource.</p>',
             'metadata' => ['title' => "403 - Forbidden", "description" => "You are not allowed to access this resource."],
             'styles' => [],
         ]);
@@ -48,7 +48,7 @@ switch ($httpCode) {
     case 500:
         header_remove();
         sendJsonResponse([
-            'content' => '<h1>500 - Server Error</h1><p>An internal server error occurred.</p>',
+            'content' => '<h1>500 - Internal Server Error.</h1><p>An internal server error occurred.</p>',
             'metadata' => ['title' => "500 - Server Error", "description" => "An internal server error occurred."],
             'styles' => [],
         ]);

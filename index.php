@@ -9,6 +9,8 @@
     <script defer src="/app/js/app" type="module"></script>
 </head>
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">
+        <h1>Loading...</h1>
+    </div>
 </body>
 </html>

@@ -44,9 +44,7 @@ window
       setTheme("system");
     }
   });
-document.addEventListener("navigationend", (event) => {
-  console.log("Navigation :", event);
-  // Vous pouvez ajouter ici d'autres logiques à exécuter après la navigation
+document.addEventListener("navigationend", () => {
   // Appliquer la classe au chargement de la page
   const theme_btn = document.getElementById("theme-toggle");
   theme_btn && (theme_btn.innerHTML = applyThemeClass());
