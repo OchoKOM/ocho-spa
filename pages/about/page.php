@@ -1,4 +1,5 @@
-<div class="logo">
+<div class="content">
+    <div class="logo">
     <svg class="logo-svg" width="100" height="100"
         viewBox="0 0 328 326.6">
         <g>
@@ -34,6 +35,38 @@
             c2-1.3,3.3-3.3,5.3-4.6L128.8,51.1z" />
         </g>
     </svg>
-    <p style="text-align: initial;">The Ocho SPA project is a single-page web application that uses PHP for the backend and JavaScript for the frontend. It allows pages to be loaded dynamically and routes to be managed via an API.</p>
-    <a class="button" href="https://ochokom.github.io/ocho-spa-docs/" target="_blank" rel="noopener noreferrer">Documentation</a>
+
+    </div>
+  <h2>About the Ocho SPA Project</h2>
+  <div>
+    <p>
+      The <strong>Ocho SPA</strong> project is a single-page web application designed to provide a seamless and dynamic user experience. By leveraging PHP for backend processing and JavaScript for frontend interactions, Ocho SPA dynamically loads content and manages routes through a dedicated API, enabling smooth navigation without full page reloads.
+    </p>
+
+    <h3>Objectives and Benefits</h3>
+    <ul>
+      <li>
+        <strong>Optimized User Experience</strong>: Enjoy smooth transitions and an interactive interface that keeps users engaged without interruptions.
+      </li>
+      <li>
+        <strong>Simplified Maintenance</strong>: The clear separation between server-side logic (PHP) and client-side behavior (JavaScript) makes the application easy to maintain and extend.
+      </li>
+      <li>
+        <strong>Enhanced Performance</strong>: Dynamic page loading reduces server load and accelerates response times, resulting in a faster and more efficient web experience.
+      </li>
+    </ul>
+
+    <h3>Technologies Used</h3>
+    <ul>
+      <li>
+        <strong>PHP</strong>: Handles server-side processing, business logic, and database interactions.
+      </li>
+      <li>
+        <strong>JavaScript</strong>: Powers the interactive frontend, enabling efficient DOM manipulation and event handling.
+      </li>
+      <li>
+        <strong>API-Driven Route Management</strong>: Controls the navigation within the application, allowing for seamless page transitions.
+      </li>
+    </ul>
+  </div>
 </div>

@@ -110,8 +110,8 @@
         <pre><code>{
     <span class="identifier">"content"</span>: <span class="string">"&lt;h1&gt;Welcome&lt;/h1&gt;"</span>,
     <span class="identifier">"metadata"</span>: {
-    <span class="identifier">"title"</span>: <span class="string">"Styles"</span>,
-    <span class="identifier">"description"</span>: <span class="string">"Page with style"</span>,
+        <span class="identifier">"title"</span>: <span class="string">"Styles"</span>,
+        <span class="identifier">"description"</span>: <span class="string">"Page with style"</span>,
     },
     <span class="identifier">"styles"</span>: [<span class="string">"/path/to/style.css"</span>, <span class="string">"/path/to/style-2.css"</span>]
 }</code></pre>
