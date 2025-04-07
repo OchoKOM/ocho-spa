@@ -44,6 +44,7 @@ window
       setTheme("system");
     }
   });
+
 document.addEventListener("navigationend", () => {
   // Appliquer la classe au chargement de la page
   const theme_btn = document.getElementById("theme-toggle");
@@ -51,10 +52,19 @@ document.addEventListener("navigationend", () => {
 
   theme_btn &&
     theme_btn.addEventListener("click", () => {
-      const themes = ["system", "dark", "light"];
-      const currentThene = getTheme();
-      const nextTheme = themes[themes.indexOf(currentThene) + 1] ?? themes[0];
-      theme_btn.innerHTML = setTheme(nextTheme);
+      const currentTheme = getTheme();
+      
+      if (currentTheme === "system") {
+        // Si le thème est système, on passe à l'opposé de ce que le système utilise
+        const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const oppositeTheme = systemPrefersDark ? "light" : "dark";
+        theme_btn.innerHTML = setTheme(oppositeTheme);
+      } else {
+        // Rotation normale entre les thèmes
+        const themes = ["light", "system", "dark"];
+        const nextTheme = themes[themes.indexOf(currentTheme) + 1] ?? themes[0];
+        theme_btn.innerHTML = setTheme(nextTheme);
+      }
     });
 });
 applyThemeClass();
